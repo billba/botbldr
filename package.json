@@ -1,0 +1,22 @@
+{
+  "name": "botbuilder-botbldr",
+  "version": "0.1.0",
+  "description": "Simple starters for botbuilder",
+  "main": "lib/botbldr.js",
+  "types": "lib/botbldr.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bill Barnes",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/restify": "^5.0.7",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "botbuilder": "^4.0.0-m2.1",
+    "restify": "^7.0.0"
+  }
+}
