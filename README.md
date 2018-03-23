@@ -11,9 +11,11 @@ You can use predefine classes for console and service bots, or bake your own.
 ```
 npm install --save botbuilder-botbldr
 ```
+
 ## What does it look like?
 
 Here's an echobot using the predefined `ConsoleBot`:
+
 ```ts
 import { ConsoleBot } from 'botbuilder-botbldr';
 
@@ -24,13 +26,17 @@ bot.onRequest(async context => {
     await context.sendActivity(`${context.conversationState.count}: You said "${context.request.text}"`);
 });
 ```
+
 Swap out `ConsoleBot` for `ServiceBot` to test your bot with Emulator then run it in the cloud in the Azure Bot Service.
 
 Both use an extended version of `BotContext` called `StateContext` which adds `.conversationState` and `.userState` properties to `context`. Any changes you make to either of these are automatically persisted at the end of each turn. By default they use `MemoryStorage` as a state storage provider, but you can pass in any you like, e.g.
+
 ```ts
 const bot = new ConsoleBot(new FileStorage("path_to_your_file"));
 ```
+
 If you use TypeScript you can define types for these properties:
+
 ```ts
 import { ConsoleBot } from 'botbuilder-botbldr';
 
@@ -57,7 +63,23 @@ No problem, you can make your own extended context following the recipe used in 
 ## Can I add my own middleware?
 
 Sure, just add:
+
 ```ts
 bot.use(new BestMiddlewareEver())
 ```
+
 before your call to `bot.onRequest`
+
+## Can I use proactive messages?
+
+Yes.
+
+```ts
+const calledBySomeEventSomewhere = async (activity: Activity) => {
+    await bot.continueConversation(activity, async context => {
+        await context.sendActivity(`Something happened!`);
+    });
+}
+```
+
+Please not that proactive messages are not currently supported for console bots.
