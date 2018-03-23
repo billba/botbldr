@@ -1,4 +1,4 @@
-import { BotContext, ConversationReference, Middleware, Storage, ConversationState, UserState } from 'botbuilder';
+import { BotContext, ConversationReference, Middleware, Storage, ConversationState, UserState, MemoryStorage } from 'botbuilder';
 import { BaseBot } from './BaseBot';
 import { StateContext } from './StateContext';
 
@@ -6,7 +6,7 @@ export abstract class StateBot <Conversation = any, User = any> extends BaseBot<
     conversationState: ConversationState<Conversation>;
     userState: UserState<User>;
 
-    constructor (storage: Storage) {
+    constructor (storage: Storage = new MemoryStorage()) {
         super();
         this.conversationState = new ConversationState<Conversation>(storage);
         this.userState = new UserState<User>(storage);

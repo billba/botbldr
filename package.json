@@ -1,6 +1,6 @@
 {
   "name": "botbuilder-botbldr",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Simple starters for botbuilder",
   "main": "lib/botbldr.js",
   "types": "lib/botbldr.d.ts",

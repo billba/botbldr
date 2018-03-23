@@ -4,7 +4,7 @@ import { StateBot, StateContext } from './botbldr';
 export class ConsoleBot <Conversation = any, User = any> extends StateBot<Conversation, User> {
     adapter: ConsoleAdapter;
 
-    constructor(storage: Storage) {
+    constructor(storage?: Storage) {
         super(storage);
         this.adapter = new ConsoleAdapter()
             .use(this.conversationState)
@@ -19,11 +19,5 @@ export class ConsoleBot <Conversation = any, User = any> extends StateBot<Conver
         this.adapter
             .use(... this.middlewares)
             .listen(this.do(handler));
-    }
-}
-
-export class StarterConsoleBot <Conversation = any, User = any> extends ConsoleBot <Conversation, User> {
-    constructor() {
-        super(new MemoryStorage());
     }
 }

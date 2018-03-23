@@ -5,7 +5,7 @@ import { createServer } from 'restify';
 export class ServiceBot <Conversation = any, User = any> extends StateBot<Conversation, User> {
     adapter: BotFrameworkAdapter;
 
-    constructor(storage: Storage) {
+    constructor(storage?: Storage) {
         super(storage);
         
         this.adapter = new BotFrameworkAdapter({
