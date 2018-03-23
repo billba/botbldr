@@ -2,7 +2,7 @@ import { BotContext, ConversationReference, Middleware, Storage, ConversationSta
 import { BaseBot } from './BaseBot';
 import { StateContext } from './StateContext';
 
-export abstract class StateBot <Conversation, User> extends BaseBot<StateContext<Conversation, User>> {
+export abstract class StateBot <Conversation = any, User = any> extends BaseBot<StateContext<Conversation, User>> {
     conversationState: ConversationState<Conversation>;
     userState: UserState<User>;
 

@@ -1,7 +1,7 @@
 import { ConsoleAdapter, Storage, MemoryStorage } from 'botbuilder';
 import { StateBot, StateContext } from './botbldr';
 
-export class ConsoleBot <Conversation, User> extends StateBot<Conversation, User> {
+export class ConsoleBot <Conversation = any, User = any> extends StateBot<Conversation, User> {
     adapter: ConsoleAdapter;
 
     constructor(storage: Storage) {
@@ -16,12 +16,13 @@ export class ConsoleBot <Conversation, User> extends StateBot<Conversation, User
             context: StateContext<Conversation, User>,
         ) => Promise<void>
     ) {
-        this.adapter.use(... this.middlewares).listen(this.do(handler));
-        return Promise.resolve();
+        this.adapter
+            .use(... this.middlewares)
+            .listen(this.do(handler));
     }
 }
 
-export class StarterConsoleBot <Conversation, User> extends ConsoleBot <Conversation, User> {
+export class StarterConsoleBot <Conversation = any, User = any> extends ConsoleBot <Conversation, User> {
     constructor() {
         super(new MemoryStorage());
     }

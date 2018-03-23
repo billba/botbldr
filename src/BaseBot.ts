@@ -26,7 +26,7 @@ export abstract class BaseBot <AppContext> {
         handler: (
             appContext: AppContext,
         ) => Promise<void>
-    ): Promise<void>;
+    ): void;
 
     // when startConversation moves into Adapter, this can be implemented here
     startConversation(
