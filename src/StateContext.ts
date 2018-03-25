@@ -18,9 +18,9 @@ export class StateContext <Conversation, User> extends BotContext {
         conversationState: ConversationState<Conversation>,
         userState: UserState<User>, 
     ) {
-        const appContext = new StateContext<Conversation, User>(context);
-        appContext.conversationState = await conversationState.read(context);
-        appContext.userState = await userState.read(context);
-        return appContext;
+        const stateContext = new StateContext<Conversation, User>(context);
+        stateContext.conversationState = await conversationState.read(context);
+        stateContext.userState = await userState.read(context);
+        return stateContext;
     }
 }
