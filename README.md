@@ -21,7 +21,7 @@ import { ConsoleBot } from 'botbuilder-botbldr';
 
 const bot = new ConsoleBot();
 
-bot.onRequest(async context => {
+bot.onTurn(async context => {
     context.conversationState.count = context.conversationState.count === undefined ? 0 : context.conversationState.count + 1;
     await context.sendActivity(`${context.conversationState.count}: You said "${context.request.text}"`);
 });
@@ -50,7 +50,7 @@ interface MyUserState {
 
 const bot = new ConsoleBot<MyConversationState, MyUserState>();
 
-bot.onRequest(async context => {
+bot.onTurn(async context => {
     context.conversationState.count = context.conversationState.count === undefined ? 0 : context.conversationState.count + 1;
     await context.sendActivity(`${context.conversationState.count}: You said "${context.request.text}"`);
 });
@@ -72,7 +72,7 @@ before your call to `bot.onRequest`
 
 ## Can I use proactive messages?
 
-Yes.
+Yes!
 
 ```ts
 const calledBySomeEventSomewhere = async (activity: Activity) => {
@@ -81,5 +81,3 @@ const calledBySomeEventSomewhere = async (activity: Activity) => {
     });
 }
 ```
-
-Please not that proactive messages are not currently supported for console bots.

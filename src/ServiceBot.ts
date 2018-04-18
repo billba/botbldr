@@ -16,7 +16,7 @@ export class ServiceBot <Conversation = any, User = any> extends StateBot<Conver
             .use(this.userState);
     }
 
-    onRequest(
+    onTurn(
         handler: (
             context: StateContext<Conversation, User>,
         ) => Promise<void>
@@ -26,7 +26,7 @@ export class ServiceBot <Conversation = any, User = any> extends StateBot<Conver
         const server = createServer();
 
         server.post('/api/messages', (req, res) => {
-            this.adapter.processRequest(req, res, this.do(handler));
+            this.adapter.processActivity(req, res, this.do(handler));
         });
 
         server.listen(process.env.port || process.env.PORT || 3978, () => {
@@ -40,12 +40,11 @@ export class ServiceBot <Conversation = any, User = any> extends StateBot<Conver
             appContext: StateContext<Conversation, User>,
         ) => Promise<void>
     ): Promise<void> {
-        return this.adapter.startConversation(reference, this.do(handler));
+        return this.adapter.createConversation(reference, this.do(handler));
     }
 
-    // when startConversation moves into Adapter, this can be implemented here
     continueConversation(
-        reference: Partial<ConversationReference>,
+        reference: ConversationReference,
         handler: (
             appContext: StateContext<Conversation, User>,
         ) => Promise<void>

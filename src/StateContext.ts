@@ -1,9 +1,9 @@
 
-import { BotContext, ConversationState, UserState } from 'botbuilder';
+import { TurnContext, ConversationState, UserState } from 'botbuilder';
 
-export class StateContext <Conversation, User> extends BotContext {
+export class StateContext <Conversation, User> extends TurnContext {
     // instead of adding things here, add them in `from()`
-    private constructor(context: BotContext) {
+    private constructor(context: TurnContext) {
         super(context);
     }
 
@@ -14,7 +14,7 @@ export class StateContext <Conversation, User> extends BotContext {
     // "from" adds any properties or methods that depend on arguments or async calls or both
     // think of it as an async constructor
     static async from <Conversation = any, User = any> (
-        context: BotContext,
+        context: TurnContext,
         conversationState: ConversationState<Conversation>,
         userState: UserState<User>, 
     ) {

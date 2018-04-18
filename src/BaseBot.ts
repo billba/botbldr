@@ -1,4 +1,4 @@
-import { BotContext, ConversationReference, Middleware, MiddlewareHandler } from 'botbuilder';
+import { TurnContext, ConversationReference, Middleware, MiddlewareHandler } from 'botbuilder';
 
 export abstract class BaseBot <AppContext> {
     protected middlewares: (Middleware | MiddlewareHandler)[] = [];
@@ -6,7 +6,7 @@ export abstract class BaseBot <AppContext> {
     protected do (
         handler: (appContext: AppContext,
     ) => Promise<void>) {
-        return (context: BotContext) => this
+        return (context: TurnContext) => this
             .getContext(context)
             .then(appContext => handler(appContext));
     }
@@ -19,10 +19,10 @@ export abstract class BaseBot <AppContext> {
     }
 
     abstract getContext(
-        context: BotContext
+        context: TurnContext
     ): Promise<AppContext>;
 
-    abstract onRequest(
+    abstract onTurn(
         handler: (
             appContext: AppContext,
         ) => Promise<void>
@@ -40,7 +40,7 @@ export abstract class BaseBot <AppContext> {
 
     // when startConversation moves into Adapter, this can be implemented here
     continueConversation(
-        reference: Partial<ConversationReference>,
+        reference: ConversationReference,
         handler: (
             appContext: AppContext,
         ) => Promise<void>

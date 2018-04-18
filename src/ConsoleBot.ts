@@ -1,4 +1,4 @@
-import { ConsoleAdapter, Storage, MemoryStorage } from 'botbuilder';
+import { ConsoleAdapter, Storage, MemoryStorage, ConversationReference } from 'botbuilder';
 import { StateBot, StateContext } from './botbldr';
 
 export class ConsoleBot <Conversation = any, User = any> extends StateBot<Conversation, User> {
@@ -11,7 +11,7 @@ export class ConsoleBot <Conversation = any, User = any> extends StateBot<Conver
             .use(this.userState);
     }
 
-    onRequest(
+    onTurn(
         handler: (
             context: StateContext<Conversation, User>,
         ) => Promise<void>
@@ -19,5 +19,14 @@ export class ConsoleBot <Conversation = any, User = any> extends StateBot<Conver
         this.adapter
             .use(... this.middlewares)
             .listen(this.do(handler));
+    }
+
+    continueConversation(
+        reference: ConversationReference,
+        handler: (
+            appContext: StateContext<Conversation, User>,
+        ) => Promise<void>
+    ): Promise<void> {
+        return this.adapter.continueConversation(reference, this.do(handler));
     }
 }
