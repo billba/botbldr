@@ -1,6 +1,6 @@
 {
   "name": "botbuilder-botbldr",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Simple starters for botbuilder",
   "main": "lib/botbldr.js",
   "types": "lib/botbldr.d.ts",
@@ -13,10 +13,10 @@
   "license": "MIT",
   "devDependencies": {
     "@types/restify": "^5.0.7",
-    "typescript": "^2.8.1"
+    "typescript": "^2.8.3"
   },
   "dependencies": {
-    "botbuilder": "^4.0.0-m3.0",
-    "restify": "^7.0.0"
+    "botbuilder": "4.0.0-preview1.2",
+    "restify": "^7.1.1"
   }
 }
